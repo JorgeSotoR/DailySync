@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pantalla principal: menú (izquierda) + contenido (derecha). Pesos 35/65 (vertical). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/azul_oscuro"
+    android:orientation="horizontal">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/menu_container"
+        android:name="co.edu.poli.dailysync.ui.MenuFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="35" />
+
+    <FrameLayout
+        android:id="@+id/content_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="65"
+        android:background="@color/fondo" />
+</LinearLayout>

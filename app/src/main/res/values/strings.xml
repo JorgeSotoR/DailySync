@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DailySync</string>
+    <string name="marca_daily">Daily</string>
+    <string name="marca_sync">Sync</string>
+
+    <!-- Perfil -->
+    <string name="perfil_titulo">Mi perfil</string>
+    <string name="perfil_avatar">Foto de perfil</string>
+    <string name="perfil_avatar_1">Avatar 1</string>
+    <string name="perfil_avatar_2">Avatar 2</string>
+    <string name="perfil_galeria">Galería</string>
+    <string name="perfil_apodo">Apodo</string>
+    <string name="perfil_fecha">Fecha de nacimiento</string>
+    <string name="perfil_genero">Género</string>
+    <string name="genero_femenino">Femenino</string>
+    <string name="genero_masculino">Masculino</string>
+    <string name="genero_no_especificado">Prefiero no decir</string>
+    <string name="perfil_guardar">Guardar perfil</string>
+    <string name="perfil_guardado">Perfil guardado</string>
+    <string name="perfil_crear">Crea tu perfil para empezar</string>
+    <string name="perfil_error_apodo">Escribe un apodo</string>
+    <string name="perfil_error_fecha">Selecciona tu fecha de nacimiento</string>
+    <string name="perfil_error_genero">Selecciona una opción de género</string>
+    <string name="perfil_error_imagen">No se pudo cargar la imagen</string>
+
+    <!-- Actividades -->
+    <string name="actividades_titulo">Actividades</string>
+    <string name="filtro_todas">Todas</string>
+    <string name="filtro_tareas">Tareas</string>
+    <string name="filtro_rutinas">Rutinas</string>
+    <string name="filtro_eventos">Eventos</string>
+    <string name="actividades_vacio">No hay actividades. Toca + para agregar una.</string>
+    <string name="actividad_nueva">Nueva actividad</string>
+    <string name="actividad_titulo_hint">Título</string>
+    <string name="actividad_tipo">Tipo</string>
+    <string name="actividad_fecha">Fecha</string>
+    <string name="agregar">Agregar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="eliminar_pregunta">¿Eliminar «%1$s»?</string>
+    <string name="error_titulo">Escribe un título</string>
+
+    <!-- Alarmas -->
+    <string name="alarmas_titulo">Alarmas</string>
+    <string name="alarmas_vacio">No hay alarmas. Toca + para crear una.</string>
+    <string name="alarmas_nota">Las notificaciones con AlarmManager se integran en la siguiente entrega.</string>
+    <string name="alarma_etiqueta">Etiqueta (opcional)</string>
+    <string name="alarma_por_defecto">Alarma</string>
+
+    <!-- Compras -->
+    <string name="compras_titulo">Lista de compras</string>
+    <string name="compras_hint">Agregar producto…</string>
+    <string name="compras_vacio">La lista está vacía.</string>
+
+    <!-- Salud -->
+    <string name="salud_titulo">Ciclo menstrual</string>
+    <string name="salud_registrar">Registrar inicio del periodo</string>
+    <string name="salud_sin_registros">Aún no hay registros. Selecciona en el calendario el día en que empezó tu periodo y toca el botón.</string>
+    <string name="salud_aviso">Los cálculos son estimaciones informativas y no reemplazan la consulta médica.</string>
+
+    <!-- En construcción -->
+    <string name="multimedia_titulo">Multimedia</string>
+    <string name="web_titulo">Explorador web</string>
+    <string name="botones_titulo">Panel de botones</string>
+    <string name="en_construccion">En construcción</string>
+    <string name="en_construccion_detalle">Este módulo se completará en la siguiente entrega.</string>
+    <string name="agregar_descripcion">Agregar</string>
+</resources>

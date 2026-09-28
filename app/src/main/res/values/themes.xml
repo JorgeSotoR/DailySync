@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DailySync" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/azul</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorSecondary">@color/naranja</item>
+        <item name="colorOnSecondary">@color/texto</item>
+        <item name="colorSecondaryContainer">@color/naranja</item>
+        <item name="colorOnSecondaryContainer">@color/texto</item>
+        <item name="android:colorBackground">@color/fondo</item>
+        <item name="android:statusBarColor">@color/azul_oscuro</item>
+        <item name="android:navigationBarColor">@color/azul_oscuro</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="DailySync.Titulo" parent="">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/azul_oscuro</item>
+    </style>
+
+    <style name="DailySync.Etiqueta" parent="">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/texto_secundario</item>
+    </style>
+
+    <style name="DailySync.Tarjeta" parent="">
+        <item name="android:background">@drawable/bg_tarjeta</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="DailySync.Circular" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

@@ -56,8 +56,22 @@
     <!-- Salud -->
     <string name="salud_titulo">Ciclo menstrual</string>
     <string name="salud_registrar">Registrar inicio del periodo</string>
-    <string name="salud_sin_registros">Aún no hay registros. Selecciona en el calendario el día en que empezó tu periodo y toca el botón.</string>
+    <string name="salud_sin_registros">Aún no hay registros. Toca en el calendario el día en que empezó tu periodo y luego el botón.</string>
     <string name="salud_aviso">Los cálculos son estimaciones informativas y no reemplazan la consulta médica.</string>
+    <string name="salud_mes_anterior">Mes anterior</string>
+    <string name="salud_mes_siguiente">Mes siguiente</string>
+    <string name="salud_leyenda_periodo">Periodo</string>
+    <string name="salud_leyenda_estimado">Estimado</string>
+    <string name="salud_leyenda_fertil">Fértil</string>
+    <string name="salud_seleccionado">Día seleccionado: %1$s</string>
+    <string name="salud_duracion">Duración del periodo (días)</string>
+    <string name="salud_futuro">No se pueden registrar fechas futuras</string>
+    <string name="salud_ya_registrado">Ese día ya hace parte de un periodo registrado</string>
+    <string name="salud_registrado">Periodo registrado</string>
+    <string name="salud_borrar_titulo">Borrar registro</string>
+    <string name="salud_borrar_pregunta">¿Borrar el periodo que empezó el %1$s?</string>
+    <string name="salud_ayuda_borrar">Mantén presionado un día rosado para borrar ese registro.</string>
+    <string name="salud_historial">Últimos registros: %1$s</string>
 
     <!-- En construcción -->
     <string name="multimedia_titulo">Multimedia</string>

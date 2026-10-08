@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,18 +16,106 @@
             android:layout_height="wrap_content"
             android:text="@string/salud_titulo" />
 
-        <CalendarView
-            android:id="@+id/calendario"
+        <!-- Calendario propio: encabezado del mes, días de la semana y cuadrícula de 7 columnas -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/bg_tarjeta" />
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_tarjeta"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_mes_anterior"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/salud_mes_anterior"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    android:text="‹"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tv_mes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/azul_oscuro"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="Octubre 2026" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_mes_siguiente"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/salud_mes_siguiente"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    android:text="›"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="L" android:textStyle="bold" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="M" android:textStyle="bold" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="X" android:textStyle="bold" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="J" android:textStyle="bold" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="V" android:textStyle="bold" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="S" android:textStyle="bold" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="D" android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_dias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+        </LinearLayout>
+
+        <!-- Leyenda -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <View android:layout_width="14dp" android:layout_height="14dp" android:background="@drawable/bg_dia_periodo" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:layout_marginEnd="10dp" android:text="@string/salud_leyenda_periodo" />
+            <View android:layout_width="14dp" android:layout_height="14dp" android:background="@drawable/bg_dia_estimado" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:layout_marginEnd="10dp" android:text="@string/salud_leyenda_estimado" />
+            <View android:layout_width="14dp" android:layout_height="14dp" android:background="@drawable/bg_dia_fertil" />
+            <TextView style="@style/DailySync.Etiqueta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:layout_marginEnd="10dp" android:text="@string/salud_leyenda_fertil" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_seleccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/texto"
+            android:textSize="13sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_registrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/salud_registrar" />
 
         <TextView
@@ -44,6 +133,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tv_ayuda"
+            style="@style/DailySync.Etiqueta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/salud_ayuda_borrar" />
 
         <TextView
             style="@style/DailySync.Etiqueta"

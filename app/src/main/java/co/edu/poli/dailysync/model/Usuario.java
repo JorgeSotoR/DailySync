@@ -9,11 +9,13 @@ public class Usuario {
 
     public static final String AVATAR_1 = "avatar_1";
     public static final String AVATAR_2 = "avatar_2";
+    /** Un avatar con emoji se guarda como "emoji:😎". */
+    public static final String PREFIJO_EMOJI = "emoji:";
 
     private String apodo;
     private long fechaNacimiento;   // milisegundos
     private String genero;
-    /** "avatar_1", "avatar_2" o la ruta de una imagen guardada en almacenamiento interno. */
+    /** "avatar_1", "avatar_2", "emoji:😎" o la ruta de una imagen guardada en almacenamiento interno. */
     private String avatar;
 
     public Usuario(String apodo, long fechaNacimiento, String genero, String avatar) {
@@ -26,6 +28,14 @@ public class Usuario {
     /** Regla del RF-02: el módulo Salud solo se muestra si el género es femenino. */
     public boolean esFemenino() {
         return GENERO_FEMENINO.equals(genero);
+    }
+
+    public static boolean esEmoji(String avatar) {
+        return avatar != null && avatar.startsWith(PREFIJO_EMOJI) && avatar.length() > PREFIJO_EMOJI.length();
+    }
+
+    public static String emojiDe(String avatar) {
+        return esEmoji(avatar) ? avatar.substring(PREFIJO_EMOJI.length()) : "";
     }
 
     public String getApodo() { return apodo; }

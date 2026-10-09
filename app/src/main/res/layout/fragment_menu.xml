@@ -32,6 +32,36 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Usuario guardado: avatar (imagen o emoji) y apodo. Al tocarlo abre el perfil. -->
+    <LinearLayout
+        android:id="@+id/ll_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="gone">
+
+        <co.edu.poli.dailysync.ui.AvatarView
+            android:id="@+id/avatar_menu"
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+
+        <TextView
+            android:id="@+id/tv_usuario_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/blanco"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_menu"
         android:layout_width="match_parent"

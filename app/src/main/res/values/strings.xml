@@ -10,6 +10,14 @@
     <string name="perfil_avatar_1">Avatar 1</string>
     <string name="perfil_avatar_2">Avatar 2</string>
     <string name="perfil_galeria">Galería</string>
+    <string name="perfil_emoji">Emoji</string>
+    <string name="perfil_elegir_emoji">Elige un emoji</string>
+    <string name="perfil_saludo">¡Hola, %1$s!</string>
+    <string name="perfil_guardado_insignia">✓ Perfil guardado</string>
+    <string name="perfil_editar">Editar perfil</string>
+    <string name="perfil_edad">%1$s (%2$d años)</string>
+    <string name="perfil_nuevo_titulo">Crea tu perfil</string>
+    <string name="perfil_editar_titulo">Editar perfil</string>
     <string name="perfil_apodo">Apodo</string>
     <string name="perfil_fecha">Fecha de nacimiento</string>
     <string name="perfil_genero">Género</string>

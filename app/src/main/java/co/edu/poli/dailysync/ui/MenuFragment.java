@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,11 @@ public class MenuFragment extends Fragment {
     private MenuAdapter adapter;
     private String seleccionada = PERFIL;
     private boolean mostrarSalud;
+    private Usuario usuario;
+
+    private View llUsuario;
+    private AvatarView avatarMenu;
+    private TextView tvUsuarioMenu;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -57,7 +63,7 @@ public class MenuFragment extends Fragment {
         if (savedInstanceState != null) {
             seleccionada = savedInstanceState.getString(ESTADO_SELECCION, PERFIL);
         }
-        Usuario usuario = new LocalRepository(requireContext()).obtenerUsuario();
+        usuario = new LocalRepository(requireContext()).obtenerUsuario();
         mostrarSalud = usuario != null && usuario.esFemenino();
         construirOpciones();
     }
@@ -79,6 +85,15 @@ public class MenuFragment extends Fragment {
             listener.onMenuItemSelected(opcion);
         });
         rv.setAdapter(adapter);
+
+        llUsuario = view.findViewById(R.id.ll_usuario);
+        avatarMenu = view.findViewById(R.id.avatar_menu);
+        tvUsuarioMenu = view.findViewById(R.id.tv_usuario_menu);
+        llUsuario.setOnClickListener(v -> {
+            marcarSeleccion(PERFIL);
+            listener.onMenuItemSelected(PERFIL);
+        });
+        mostrarUsuario();
     }
 
     @Override
@@ -100,6 +115,25 @@ public class MenuFragment extends Fragment {
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
+    }
+
+    /** Actualiza el avatar y el apodo del encabezado del menú después de guardar el perfil. */
+    public void actualizarUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        mostrarUsuario();
+    }
+
+    private void mostrarUsuario() {
+        if (llUsuario == null) {
+            return;
+        }
+        if (usuario == null) {
+            llUsuario.setVisibility(View.GONE);
+            return;
+        }
+        llUsuario.setVisibility(View.VISIBLE);
+        avatarMenu.setAvatar(usuario.getAvatar());
+        tvUsuarioMenu.setText(usuario.getApodo());
     }
 
     /** Resalta una opción sin disparar el evento de navegación. */

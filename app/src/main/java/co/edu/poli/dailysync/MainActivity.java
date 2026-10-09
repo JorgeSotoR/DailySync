@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPerfilGuardado(Usuario usuario) {
         menuFragment.actualizarOpciones(usuario.esFemenino());
+        menuFragment.actualizarUsuario(usuario);
         Toast.makeText(this, R.string.perfil_guardado, Toast.LENGTH_SHORT).show();
     }
 

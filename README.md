@@ -43,9 +43,8 @@ Los datos se guardan en el dispositivo (SharedPreferences + JSON con Gson).
 3. Ejecutar en un emulador o teléfono con **Run ▶**.
 4. Generar la APK con *Build > Build App Bundle(s) / APK(s) > Build APK(s)*.
    El archivo queda en `app/build/outputs/apk/debug/app-debug.apk`.
-5. Copiarlo a la carpeta `apk/` con el nombre `DailySync-final.apk` y subirlo al repositorio.
+5. Instalar.
 
-Desde la terminal también se puede usar `./gradlew assembleDebug` (en Windows: `gradlew.bat assembleDebug`).
 
 ## Estructura
 

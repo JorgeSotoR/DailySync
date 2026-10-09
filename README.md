@@ -19,14 +19,14 @@ La opción **Salud** solo aparece en el menú cuando el perfil tiene género fem
 En orientación horizontal se usa `layout-land/activity_main.xml` con pesos 30/70.
 Los datos se guardan en el dispositivo (SharedPreferences + JSON con Gson).
 
-## Estado de la entrega 2 (versión 0.2.0)
+## Estado de la entrega final (versión 1.0.0)
 
 | Módulo | Estado |
 |---|---|
 | Pantalla con dos fragmentos | Funcional |
 | Perfil (apodo, fecha, género; avatar predeterminado, emoji o foto de galería; resumen del perfil guardado) | Funcional |
 | Menú que cambia según el género | Funcional |
-| Actividades (crear, completar, eliminar, filtrar por tipo, agrupar por día) | Parcial: falta filtro por fecha |
+| Actividades (crear, completar, eliminar, filtrar por tipo y por fecha, agrupar por día) | Funcional |
 | Alarmas (crear, editar, repetir por días, activar/desactivar, eliminar; suenan en bucle con pantalla completa sobre el bloqueo, Detener y Posponer 5 min; AlarmManager + servicio en primer plano; se restauran al reiniciar) | Funcional |
 | Lista de compras (texto, foto con cámara o galería, recibir contenido con "Compartir" desde otras apps, marcar, eliminar) | Funcional |
 | Salud (calendario con periodo, periodo estimado y ventana fértil; borrar registros) | Funcional |
@@ -43,7 +43,7 @@ Los datos se guardan en el dispositivo (SharedPreferences + JSON con Gson).
 3. Ejecutar en un emulador o teléfono con **Run ▶**.
 4. Generar la APK con *Build > Build App Bundle(s) / APK(s) > Build APK(s)*.
    El archivo queda en `app/build/outputs/apk/debug/app-debug.apk`.
-5. Copiarlo a la carpeta `apk/` con el nombre `DailySync-entrega2.apk` y subirlo al repositorio.
+5. Copiarlo a la carpeta `apk/` con el nombre `DailySync-final.apk` y subirlo al repositorio.
 
 Desde la terminal también se puede usar `./gradlew assembleDebug` (en Windows: `gradlew.bat assembleDebug`).
 
@@ -60,7 +60,7 @@ app/src/main/java/co/edu/poli/dailysync/
 └── ui/           MenuFragment, AvatarView, PerfilFragment, ActividadesFragment, AlarmasFragment,
                   ComprasFragment, SaludFragment, MultimediaFragment (+ ConsejoAdapter), WebFragment, EjercicioFragment, BotonesFragment
 apk/              APK de cada entrega
-docs/             Documento de la entrega, diagramas UML y mockup
+docs/             Documentos de cada entrega; docs/final/ tiene el documento, los diagramas UML y el mockup finales
 ```
 
 - SDK mínimo 26 (Android 8.0), SDK objetivo 35, Java 17.

@@ -39,6 +39,16 @@
     <string name="filtro_rutinas">Rutinas</string>
     <string name="filtro_eventos">Eventos</string>
     <string name="actividades_vacio">No hay actividades. Toca + para agregar una.</string>
+    <string name="actividades_vacio_filtro">No hay actividades con estos filtros.</string>
+    <string name="filtro_fecha_titulo">Filtrar por fecha</string>
+    <string name="filtro_fecha_todas">📅 Todas las fechas</string>
+    <string name="filtro_fecha_hoy">📅 Hoy</string>
+    <string name="filtro_fecha_semana">📅 Esta semana</string>
+    <string name="filtro_fecha_dia">📅 %1$s</string>
+    <string name="filtro_opcion_todas">Todas las fechas</string>
+    <string name="filtro_opcion_hoy">Hoy</string>
+    <string name="filtro_opcion_semana">Esta semana</string>
+    <string name="filtro_opcion_dia">Elegir un día…</string>
     <string name="actividad_nueva">Nueva actividad</string>
     <string name="actividad_titulo_hint">Título</string>
     <string name="actividad_tipo">Tipo</string>

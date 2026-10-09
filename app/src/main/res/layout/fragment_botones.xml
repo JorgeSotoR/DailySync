@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:paddingBottom="88dp">
+
+            <TextView
+                style="@style/DailySync.Titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/botones_titulo" />
+
+            <TextView
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/botones_basicos"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_guardar"
+                
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/botones_guardar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_tonal"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/botones_tonal" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_outlined"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/botones_outlined" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_texto"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/botones_texto" />
+
+            <TextView
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/botones_toggle"
+                android:textStyle="bold" />
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggle_periodo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:checkedButton="@+id/btn_dia"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_dia"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="0dp"
+                    android:text="@string/botones_dia" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_semana"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="0dp"
+                    android:text="@string/botones_semana" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_mes"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="0dp"
+                    android:text="@string/botones_mes" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <TextView
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/botones_chips"
+                android:textStyle="bold" />
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chips_habitos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="4dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_agua"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/botones_agua" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_ejercicio"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/botones_ejercicio" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_lectura"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/botones_lectura" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/botones_interruptores"
+                android:textStyle="bold" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/sw_concentracion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/botones_concentracion" />
+
+            <CheckBox
+                android:id="@+id/cb_recordarme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/botones_recordarme" />
+
+            <TextView
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/botones_deslizador"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_vasos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_vasos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                android:value="4"
+                android:valueFrom="0"
+                android:valueTo="10" />
+
+            <TextView
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/botones_registro"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_registro"
+                style="@style/DailySync.Tarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/botones_registro_vacio"
+                android:textColor="@color/texto"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_total"
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones flotantes -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_pequeno"
+        style="@style/Widget.Material3.FloatingActionButton.Small.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/agregar_descripcion"
+        app:srcCompat="@drawable/ic_add" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_extendido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="@string/botones_nueva_tarea"
+        android:textColor="@color/texto"
+        app:backgroundTint="@color/naranja"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@color/texto" />
+</FrameLayout>

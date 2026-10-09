@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/azul_oscuro"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_alarma"
+        app:tint="@color/naranja" />
+
+    <TextView
+        android:id="@+id/tv_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/blanco"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        tools:text="6:30 a.m." />
+
+    <TextView
+        android:id="@+id/tv_etiqueta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/blanco"
+        android:textSize="26sp"
+        tools:text="Gimnasio" />
+
+    <TextView
+        android:id="@+id/tv_detalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="@color/texto_menu"
+        android:textSize="16sp"
+        tools:text="Jueves 8 de octubre · Lunes a viernes" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.4" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_detener"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:text="@string/alarma_detener"
+        android:textColor="@color/texto"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/naranja"
+        app:cornerRadius="36dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_posponer"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/alarma_posponer"
+        android:textColor="@color/blanco"
+        android:textSize="18sp"
+        app:cornerRadius="30dp"
+        app:strokeColor="@color/blanco" />
+</LinearLayout>

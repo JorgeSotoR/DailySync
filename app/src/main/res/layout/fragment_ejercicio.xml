@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Registro de actividad física (RF-10): series, repeticiones, descansos, minutos y pasos. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:paddingBottom="88dp">
+
+            <TextView
+                style="@style/DailySync.Titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ejercicio_titulo" />
+
+            <!-- Resumen por periodo -->
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggle_periodo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:checkedButton="@+id/btn_hoy"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_hoy"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="0dp"
+                    android:text="@string/ejercicio_hoy" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_semana"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="0dp"
+                    android:text="@string/ejercicio_semana" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_mes"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="0dp"
+                    android:text="@string/ejercicio_mes" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <TextView
+                android:id="@+id/tv_resumen"
+                style="@style/DailySync.Tarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="3dp"
+                android:textColor="@color/texto"
+                android:textSize="14sp" />
+
+            <!-- ===== Configuración del ejercicio ===== -->
+            <LinearLayout
+                android:id="@+id/ll_configuracion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/DailySync.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/ejercicio_elegir"
+                    android:textStyle="bold" />
+
+                <!-- Los chips se crean desde el código con el catálogo de ejercicios -->
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chips_ejercicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:chipSpacingHorizontal="4dp"
+                    app:selectionRequired="true"
+                    app:singleSelection="true" />
+
+                <TextView
+                    style="@style/DailySync.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/ejercicio_configurar"
+                    android:textStyle="bold" />
+
+                <!-- Repeticiones -->
+                <LinearLayout
+                    android:id="@+id/ll_repeticiones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_series"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/slider_series"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stepSize="1"
+                        android:value="3"
+                        android:valueFrom="1"
+                        android:valueTo="10" />
+
+                    <TextView
+                        android:id="@+id/tv_reps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/slider_reps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stepSize="1"
+                        android:value="10"
+                        android:valueFrom="1"
+                        android:valueTo="50" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/sw_descanso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/ejercicio_descanso" />
+                </LinearLayout>
+
+                <!-- Duración -->
+                <LinearLayout
+                    android:id="@+id/ll_duracion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_minutos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/slider_minutos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stepSize="5"
+                        android:value="20"
+                        android:valueFrom="5"
+                        android:valueTo="120" />
+                </LinearLayout>
+
+                <!-- Pasos -->
+                <LinearLayout
+                    android:id="@+id/ll_pasos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_pasos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto" />
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/slider_pasos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stepSize="500"
+                        android:value="6000"
+                        android:valueFrom="500"
+                        android:valueTo="20000" />
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_sin_guia"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/ejercicio_registrar_sin_guia" />
+            </LinearLayout>
+
+            <!-- ===== Sesión guiada: series y descansos ===== -->
+            <LinearLayout
+                android:id="@+id/ll_sesion"
+                style="@style/DailySync.Tarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_sesion_ejercicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_oscuro"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_sesion_serie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_sesion_indicacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:textColor="@color/texto"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <!-- Cuenta regresiva del descanso -->
+                <FrameLayout
+                    android:id="@+id/fl_descanso"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progreso_descanso"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:max="60"
+                        app:indicatorColor="@color/naranja"
+                        app:indicatorSize="120dp"
+                        app:trackColor="@color/borde"
+                        app:trackThickness="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_cuenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/texto"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_serie_completada"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/ejercicio_serie_completada"
+                    android:textSize="16sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_saltar"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ejercicio_saltar"
+                    android:visibility="gone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_cancelar_sesion"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ejercicio_cancelar"
+                    android:textColor="@color/texto_secundario" />
+            </LinearLayout>
+
+            <!-- ===== Historial de hoy ===== -->
+            <TextView
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/ejercicio_historial"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll_historial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/tv_historial_ayuda"
+                style="@style/DailySync.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Iniciar (repeticiones) o Registrar (duración y pasos) -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_iniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="@string/ejercicio_iniciar"
+        android:textColor="@color/texto"
+        app:backgroundTint="@color/naranja"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@color/texto" />
+</FrameLayout>

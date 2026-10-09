@@ -54,6 +54,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/filtro_eventos" />
         </com.google.android.material.chip.ChipGroup>
+
+        <!-- Filtro por fecha: hoy, esta semana, un día elegido o todas -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_filtro_fecha"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filtro_fecha_todas" />
         <TextView
             android:id="@+id/tv_vacio"
             style="@style/DailySync.Etiqueta"

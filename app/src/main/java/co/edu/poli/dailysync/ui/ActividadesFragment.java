@@ -23,6 +23,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -35,7 +40,7 @@ import co.edu.poli.dailysync.data.LocalRepository;
 import co.edu.poli.dailysync.model.Actividad;
 import co.edu.poli.dailysync.model.TipoActividad;
 
-/** Tareas, rutinas y eventos agrupados por día, con checklist y filtro por tipo (RF-04). */
+/** Tareas, rutinas y eventos agrupados por día, con checklist y filtros por tipo y por fecha (RF-04). */
 public class ActividadesFragment extends Fragment implements ActividadAdapter.Acciones {
 
     private static final Locale ES = new Locale("es", "CO");
@@ -47,6 +52,14 @@ public class ActividadesFragment extends Fragment implements ActividadAdapter.Ac
     private ActividadAdapter adapter;
     private TextView tvVacio;
     private TipoActividad filtro = null;   // null = todas
+
+    /** Filtro por fecha: rango [desde, hasta]; null = todas las fechas. */
+    private enum FiltroFecha { TODAS, HOY, SEMANA, DIA }
+    private static final String ESTADO_FILTRO_FECHA = "filtro_fecha";
+    private static final String ESTADO_DIA = "dia";
+    private FiltroFecha filtroFecha = FiltroFecha.TODAS;
+    private LocalDate diaElegido;
+    private Button btnFiltroFecha;
 
     @Nullable
     @Override
@@ -84,6 +97,14 @@ public class ActividadesFragment extends Fragment implements ActividadAdapter.Ac
         });
 
         view.findViewById(R.id.fab_agregar).setOnClickListener(v -> mostrarDialogoNueva());
+
+        btnFiltroFecha = view.findViewById(R.id.btn_filtro_fecha);
+        btnFiltroFecha.setOnClickListener(v -> elegirFiltroFecha());
+        if (savedInstanceState != null) {
+            filtroFecha = FiltroFecha.values()[savedInstanceState.getInt(ESTADO_FILTRO_FECHA, 0)];
+            String dia = savedInstanceState.getString(ESTADO_DIA);
+            diaElegido = dia != null ? LocalDate.parse(dia) : null;
+        }
         refrescar();
     }
 
@@ -91,7 +112,7 @@ public class ActividadesFragment extends Fragment implements ActividadAdapter.Ac
     private void refrescar() {
         List<Actividad> visibles = new ArrayList<>();
         for (Actividad a : actividades) {
-            if (filtro == null || a.getTipo() == filtro) {
+            if ((filtro == null || a.getTipo() == filtro) && cumpleFiltroFecha(a)) {
                 visibles.add(a);
             }
         }
@@ -108,7 +129,79 @@ public class ActividadesFragment extends Fragment implements ActividadAdapter.Ac
             filas.add(ActividadAdapter.Fila.de(a));
         }
         adapter.setFilas(filas);
+        boolean hayFiltros = filtro != null || filtroFecha != FiltroFecha.TODAS;
+        tvVacio.setText(hayFiltros && !actividades.isEmpty()
+                ? R.string.actividades_vacio_filtro : R.string.actividades_vacio);
         tvVacio.setVisibility(visibles.isEmpty() ? View.VISIBLE : View.GONE);
+        btnFiltroFecha.setText(textoFiltroFecha());
+    }
+
+    // ---------- Filtro por fecha ----------
+
+    private void elegirFiltroFecha() {
+        String[] opciones = {
+                getString(R.string.filtro_opcion_todas), getString(R.string.filtro_opcion_hoy),
+                getString(R.string.filtro_opcion_semana), getString(R.string.filtro_opcion_dia)
+        };
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.filtro_fecha_titulo)
+                .setItems(opciones, (d, cual) -> {
+                    if (cual == 3) {
+                        elegirDia();
+                    } else {
+                        filtroFecha = FiltroFecha.values()[cual];
+                        refrescar();
+                    }
+                })
+                .show();
+    }
+
+    private void elegirDia() {
+        LocalDate inicial = diaElegido != null ? diaElegido : LocalDate.now();
+        new DatePickerDialog(requireContext(), (p, anio, mes, dia) -> {
+            diaElegido = LocalDate.of(anio, mes + 1, dia);
+            filtroFecha = FiltroFecha.DIA;
+            refrescar();
+        }, inicial.getYear(), inicial.getMonthValue() - 1, inicial.getDayOfMonth()).show();
+    }
+
+    private boolean cumpleFiltroFecha(Actividad a) {
+        LocalDate dia = Instant.ofEpochMilli(a.getFecha()).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate hoy = LocalDate.now();
+        switch (filtroFecha) {
+            case HOY:
+                return dia.equals(hoy);
+            case SEMANA:
+                LocalDate lunes = hoy.with(DayOfWeek.MONDAY);
+                return !dia.isBefore(lunes) && !dia.isAfter(lunes.plusDays(6));
+            case DIA:
+                return dia.equals(diaElegido);
+            default:
+                return true;
+        }
+    }
+
+    private String textoFiltroFecha() {
+        switch (filtroFecha) {
+            case HOY:
+                return getString(R.string.filtro_fecha_hoy);
+            case SEMANA:
+                return getString(R.string.filtro_fecha_semana);
+            case DIA:
+                return getString(R.string.filtro_fecha_dia,
+                        diaElegido.format(DateTimeFormatter.ofPattern("EEEE d 'de' MMMM", ES)));
+            default:
+                return getString(R.string.filtro_fecha_todas);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ESTADO_FILTRO_FECHA, filtroFecha.ordinal());
+        if (diaElegido != null) {
+            outState.putString(ESTADO_DIA, diaElegido.toString());
+        }
     }
 
     private void mostrarDialogoNueva() {

@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
+
+import androidx.exifinterface.media.ExifInterface;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +24,7 @@ import co.edu.poli.dailysync.model.Actividad;
 import co.edu.poli.dailysync.model.Alarma;
 import co.edu.poli.dailysync.model.ItemCompra;
 import co.edu.poli.dailysync.model.RegistroCiclo;
+import co.edu.poli.dailysync.model.RegistroEjercicio;
 import co.edu.poli.dailysync.model.Usuario;
 
 /**
@@ -35,6 +39,7 @@ public class LocalRepository {
     private static final String K_ALARMAS = "alarmas";
     private static final String K_COMPRAS = "compras";
     private static final String K_CICLO = "ciclo";
+    private static final String K_EJERCICIOS = "ejercicios";
 
     /** Tamaño máximo (en píxeles) de la imagen de perfil guardada. */
     private static final int LADO_MAXIMO_AVATAR = 512;
@@ -93,6 +98,14 @@ public class LocalRepository {
         guardarLista(K_CICLO, lista);
     }
 
+    public List<RegistroEjercicio> obtenerEjercicios() {
+        return leerLista(K_EJERCICIOS, new TypeToken<List<RegistroEjercicio>>() { }.getType());
+    }
+
+    public void guardarEjercicios(List<RegistroEjercicio> lista) {
+        guardarLista(K_EJERCICIOS, lista);
+    }
+
     private void guardarLista(String clave, List<?> lista) {
         prefs.edit().putString(clave, gson.toJson(lista)).apply();
     }
@@ -108,19 +121,25 @@ public class LocalRepository {
 
     // ---------- Imágenes ----------
 
-    /**
-     * Copia una imagen elegida en la galería al almacenamiento interno de la app,
-     * reducida a un máximo de 512 px por lado. Devuelve la ruta del archivo.
-     */
+    /** Guarda la foto de perfil (máximo 512 px por lado). */
     public String guardarImagen(Uri uri) throws IOException {
+        return guardarImagen(uri, "avatar", LADO_MAXIMO_AVATAR);
+    }
+
+    /**
+     * Copia una imagen (galería, cámara u otra app) al almacenamiento interno de DailySync,
+     * reducida a un lado máximo y con la rotación corregida según los datos EXIF de la cámara.
+     * Devuelve la ruta del archivo guardado.
+     */
+    public String guardarImagen(Uri uri, String prefijo, int ladoMaximo) throws IOException {
         BitmapFactory.Options limites = new BitmapFactory.Options();
         limites.inJustDecodeBounds = true;
         try (InputStream in = context.getContentResolver().openInputStream(uri)) {
             BitmapFactory.decodeStream(in, null, limites);
         }
         int escala = 1;
-        while (limites.outWidth / (escala * 2) >= LADO_MAXIMO_AVATAR
-                && limites.outHeight / (escala * 2) >= LADO_MAXIMO_AVATAR) {
+        while (limites.outWidth / (escala * 2) >= ladoMaximo
+                && limites.outHeight / (escala * 2) >= ladoMaximo) {
             escala *= 2;
         }
         BitmapFactory.Options opciones = new BitmapFactory.Options();
@@ -132,11 +151,50 @@ public class LocalRepository {
         if (bitmap == null) {
             throw new IOException("No se pudo leer la imagen");
         }
-        File archivo = new File(context.getFilesDir(), "avatar_" + System.currentTimeMillis() + ".jpg");
+
+        int grados = gradosDeRotacion(uri);
+        if (grados != 0) {
+            Matrix matriz = new Matrix();
+            matriz.postRotate(grados);
+            Bitmap rotada = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matriz, true);
+            if (rotada != bitmap) {
+                bitmap.recycle();
+                bitmap = rotada;
+            }
+        }
+
+        File archivo = new File(context.getFilesDir(), prefijo + "_" + System.currentTimeMillis() + ".jpg");
         try (FileOutputStream out = new FileOutputStream(archivo)) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 88, out);
         }
         bitmap.recycle();
         return archivo.getAbsolutePath();
+    }
+
+    /** Las fotos de la cámara suelen guardarse "acostadas" con una marca de orientación EXIF. */
+    private int gradosDeRotacion(Uri uri) {
+        try (InputStream in = context.getContentResolver().openInputStream(uri)) {
+            if (in == null) {
+                return 0;
+            }
+            int orientacion = new ExifInterface(in).getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientacion) {
+                case ExifInterface.ORIENTATION_ROTATE_90:  return 90;
+                case ExifInterface.ORIENTATION_ROTATE_180: return 180;
+                case ExifInterface.ORIENTATION_ROTATE_270: return 270;
+                default:                                   return 0;
+            }
+        } catch (IOException | RuntimeException e) {
+            return 0;
+        }
+    }
+
+    /** Borra un archivo de imagen guardado por la app (por ejemplo, al eliminar un producto). */
+    public void eliminarImagen(String ruta) {
+        if (ruta != null && ruta.startsWith(context.getFilesDir().getAbsolutePath())) {
+            //noinspection ResultOfMethodCallIgnored
+            new File(ruta).delete();
+        }
     }
 }

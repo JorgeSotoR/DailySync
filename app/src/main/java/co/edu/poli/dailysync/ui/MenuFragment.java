@@ -31,9 +31,10 @@ public class MenuFragment extends Fragment {
     public static final String SALUD = "Salud";
     public static final String MULTIMEDIA = "Multimedia";
     public static final String WEB = "Web";
+    public static final String EJERCICIO = "Ejercicio";
     public static final String BOTONES = "Botones";
 
-    private static final String[] TODAS = {PERFIL, ACTIVIDADES, ALARMAS, COMPRAS, SALUD, MULTIMEDIA, WEB, BOTONES};
+    private static final String[] TODAS = {PERFIL, ACTIVIDADES, ALARMAS, COMPRAS, SALUD, EJERCICIO, MULTIMEDIA, WEB, BOTONES};
     private static final String ESTADO_SELECCION = "seleccion";
 
     private final List<String> opciones = new ArrayList<>();

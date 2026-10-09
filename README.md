@@ -24,13 +24,16 @@ Los datos se guardan en el dispositivo (SharedPreferences + JSON con Gson).
 | Módulo | Estado |
 |---|---|
 | Pantalla con dos fragmentos | Funcional |
-| Perfil (apodo, fecha, género, avatar predeterminado o de galería) | Funcional |
+| Perfil (apodo, fecha, género; avatar predeterminado, emoji o foto de galería; resumen del perfil guardado) | Funcional |
 | Menú que cambia según el género | Funcional |
 | Actividades (crear, completar, eliminar, filtrar por tipo, agrupar por día) | Parcial: falta filtro por fecha |
-| Alarmas (crear, activar/desactivar, eliminar) | Parcial: falta AlarmManager y notificaciones |
-| Lista de compras (texto, marcar, eliminar) | Parcial: faltan fotos e intents compartidos |
-| Salud (registro del ciclo y estimación del próximo periodo) | Funcional |
-| Multimedia, Web, Botones | En construcción |
+| Alarmas (crear, editar, repetir por días, activar/desactivar, eliminar; suenan en bucle con pantalla completa sobre el bloqueo, Detener y Posponer 5 min; AlarmManager + servicio en primer plano; se restauran al reiniciar) | Funcional |
+| Lista de compras (texto, foto con cámara o galería, recibir contenido con "Compartir" desde otras apps, marcar, eliminar) | Funcional |
+| Salud (calendario con periodo, periodo estimado y ventana fértil; borrar registros) | Funcional |
+| Multimedia (video con controles: ejemplo en línea o del teléfono; galería horizontal de consejos) | Funcional |
+| Web (URL o búsqueda, WebView con progreso, atajos y botón Atrás) | Funcional |
+| Actividad física (burpees, sentadillas, flexiones, abdominales, estiramientos, ciclismo, trote, pasos; sesión guiada por series con descanso de 1 minuto; resumen de hoy, semana y mes) | Funcional |
+| Panel de botones (Button, Tonal, Outlined, Text, Toggle, Chips, Switch, CheckBox, Slider, FAB con registro de eventos) | Funcional |
 
 ## Cómo abrirlo y generar la APK
 
@@ -50,10 +53,12 @@ Desde la terminal también se puede usar `./gradlew assembleDebug` (en Windows: 
 app/src/main/java/co/edu/poli/dailysync/
 ├── MainActivity.java
 ├── OnMenuItemSelectedListener.java
+├── alarmas/      AlarmScheduler, AlarmReceiver, BootReceiver, AlarmaService, AlarmaActivity, NotificacionAlarma
 ├── data/LocalRepository.java
-├── model/        Usuario, Actividad, TipoActividad, Alarma, ItemCompra, RegistroCiclo
-└── ui/           MenuFragment, PerfilFragment, ActividadesFragment, AlarmasFragment,
-                  ComprasFragment, SaludFragment, MultimediaFragment, WebFragment, BotonesFragment
+├── model/        Usuario, Actividad, TipoActividad, Alarma, ItemCompra, RegistroCiclo, CalculadoraCiclo,
+│                 Ejercicio, RegistroEjercicio, ResumenEjercicio
+└── ui/           MenuFragment, AvatarView, PerfilFragment, ActividadesFragment, AlarmasFragment,
+                  ComprasFragment, SaludFragment, MultimediaFragment (+ ConsejoAdapter), WebFragment, EjercicioFragment, BotonesFragment
 apk/              APK de cada entrega
 docs/             Documento de la entrega, diagramas UML y mockup
 ```

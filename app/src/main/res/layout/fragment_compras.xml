@@ -1,71 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
 
+    <TextView
+        style="@style/DailySync.Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/compras_titulo" />
+
+    <!-- Entrada: texto + botón agregar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <TextView
-            style="@style/DailySync.Titulo"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/compras_titulo" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/compras_hint">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_producto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionDone"
-                    android:inputType="textCapSentences"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_agregar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="6dp"
-                android:contentDescription="@string/agregar_descripcion"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:padding="0dp"
-                android:text="+"
-                android:textSize="22sp" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_vacio"
-            style="@style/DailySync.Etiqueta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:visibility="gone" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_compras"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
             android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingBottom="72dp" />
+            android:hint="@string/compras_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_producto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_agregar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="6dp"
+            android:contentDescription="@string/agregar_descripcion"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            android:text="+"
+            android:textSize="22sp" />
     </LinearLayout>
-</FrameLayout>
+
+    <!-- Botones de foto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_camara"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:text="@string/compras_camara" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_galeria"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:text="@string/compras_galeria" />
+    </LinearLayout>
+
+    <!-- Foto pendiente (antes de tocar +) -->
+    <LinearLayout
+        android:id="@+id/ll_pendiente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_nota"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:visibility="gone">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_pendiente"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/DailySync.Redondeada" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="@string/compras_foto_lista"
+            android:textColor="#6A4A10"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_quitar_foto"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/compras_quitar_foto"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            android:text="✕"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_vacio"
+        style="@style/DailySync.Etiqueta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_compras"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp" />
+</LinearLayout>

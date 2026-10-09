@@ -1,16 +1,17 @@
 package co.edu.poli.dailysync.model;
 
-/** Producto de la lista de compras (RF-06). */
+/** Producto de la lista de compras (RF-06). Puede tener una foto de la cámara, la galería u otra app. */
 public class ItemCompra {
 
     private long id;
     private String nombre;
-    private String fotoUri;   // se usará en la siguiente entrega (cámara / galería)
+    private String fotoUri;   // ruta del archivo en el almacenamiento interno, o null
     private boolean comprado;
 
-    public ItemCompra(long id, String nombre) {
+    public ItemCompra(long id, String nombre, String fotoUri) {
         this.id = id;
         this.nombre = nombre;
+        this.fotoUri = fotoUri;
         this.comprado = false;
     }
 

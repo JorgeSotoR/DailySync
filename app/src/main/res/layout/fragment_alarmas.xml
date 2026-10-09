@@ -17,14 +17,25 @@
             android:layout_marginBottom="8dp"
             android:text="@string/alarmas_titulo" />
 
+        <!-- Aviso si faltan permisos (notificaciones o alarmas exactas). Al tocarlo abre los ajustes. -->
         <TextView
+            android:id="@+id/tv_aviso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:background="@drawable/bg_nota"
             android:padding="8dp"
-            android:text="@string/alarmas_nota"
             android:textColor="#6A4A10"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_ayuda"
+            style="@style/DailySync.Etiqueta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alarmas_ayuda"
+            android:visibility="gone" />
         <TextView
             android:id="@+id/tv_vacio"
             style="@style/DailySync.Etiqueta"

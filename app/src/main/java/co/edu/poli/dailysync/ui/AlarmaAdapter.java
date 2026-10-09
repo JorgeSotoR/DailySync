@@ -19,6 +19,7 @@ public class AlarmaAdapter extends RecyclerView.Adapter<AlarmaAdapter.Holder> {
 
     public interface Acciones {
         void onActivaCambiada(Alarma alarma, boolean activa);
+        void onEditar(Alarma alarma);
         void onEliminar(Alarma alarma);
     }
 
@@ -40,10 +41,18 @@ public class AlarmaAdapter extends RecyclerView.Adapter<AlarmaAdapter.Holder> {
     public void onBindViewHolder(@NonNull Holder h, int position) {
         Alarma a = alarmas.get(position);
         h.hora.setText(a.getHoraTexto());
-        h.etiqueta.setText(a.getEtiqueta());
-        h.activa.setOnCheckedChangeListener(null);
+        h.etiqueta.setText(a.getTextoRepeticion() + " · " + a.getEtiqueta());
+        h.hora.setAlpha(a.isActiva() ? 1f : 0.45f);
+        h.etiqueta.setAlpha(a.isActiva() ? 1f : 0.45f);
+
+        h.activa.setOnCheckedChangeListener(null);   // evita eventos al reciclar la vista
         h.activa.setChecked(a.isActiva());
-        h.activa.setOnCheckedChangeListener((b, marcado) -> acciones.onActivaCambiada(a, marcado));
+        h.activa.setOnCheckedChangeListener((b, marcado) -> {
+            h.hora.setAlpha(marcado ? 1f : 0.45f);
+            h.etiqueta.setAlpha(marcado ? 1f : 0.45f);
+            acciones.onActivaCambiada(a, marcado);
+        });
+        h.itemView.setOnClickListener(v -> acciones.onEditar(a));
         h.itemView.setOnLongClickListener(v -> {
             acciones.onEliminar(a);
             return true;
